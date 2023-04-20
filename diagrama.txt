@@ -1,0 +1,49 @@
+@startuml
+
+enum Material {
+    CUERO
+    JEAN
+    ALGODON
+}
+
+
+enum Color {
+    AZUL
+    VERDE
+    AMARILLO
+}
+
+enum Tipo {
+    ZAPATOS
+    PANTALON
+    REMERA_MANGAS_CORTAS
+    MUSCULOSA
+    ANTEOJOS
+    PANUELO
+    BOTAS
+    POLLERA
+    ZAPATILLAS
+    CROCS
+ perteneceACategoria()
+
+}
+
+class Prenda {
+
+ 
+
+ getCategoria()
+
+}
+
+class QueMePongo {
+ 
+ cargarPrenda(prenda)
+}
+
+Tipo <-- Prenda
+Material <-- Prenda
+Color <-- Prenda
+Prenda " * " <-- " 1 " QueMePongo
+
+@enduml
