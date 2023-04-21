@@ -13,5 +13,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Run the Maven verify phase
-        run: mvn --batch-mode --update-snapshots verify
+      - name: Build and test project with Maven
+        run: mvn -B package --file pom.xml
