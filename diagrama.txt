@@ -13,7 +13,7 @@ enum Color {
     AMARILLO
 }
 
-enum Tipo {
+enum TipoPrenda {
     ZAPATOS
     PANTALON
     REMERA_MANGAS_CORTAS
@@ -24,20 +24,14 @@ enum Tipo {
     POLLERA
     ZAPATILLAS
     CROCS
- perteneceACategoria()
-
+ getCategoria()
 }
 
 class Prenda {
-
- 
-
  getCategoria()
-
 }
 
 class QueMePongo {
- 
  cargarPrenda(prenda)
 }
 
