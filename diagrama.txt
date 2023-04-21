@@ -1,5 +1,6 @@
 @startuml
 
+
 enum Material {
     CUERO
     JEAN
