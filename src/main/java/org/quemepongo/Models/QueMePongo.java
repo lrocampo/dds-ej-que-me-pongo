@@ -1,10 +1,17 @@
 package org.quemepongo.Models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class QueMePongo {
   private List<Prenda> prendas = new ArrayList<>();
+
+  // Si bien dice uniformes, cual es la diferencia entre un atuendo y un uniforme?
+  // porque (a menos que el dominio lo restrinja)
+  // puede pasar que 2 colegios podrian usar los mismos colores y prendas
+  private Set<Atuendo> sugerencias = new HashSet<>();
   private PrendaBorrador prendaBorrador = new PrendaBorrador();
 
   // Me pareceria sacar la ultima prenda de prendas, y usarla como borrador. Ahora, si me cargan
@@ -41,5 +48,8 @@ public class QueMePongo {
 //    return new PrendaBorrador(prendas.remove(prendas.size() - 1));
 //  }
 
+  public void cargarSugerencia(Atuendo uniforme) {
+    sugerencias.add(uniforme);
+  }
 
 }
