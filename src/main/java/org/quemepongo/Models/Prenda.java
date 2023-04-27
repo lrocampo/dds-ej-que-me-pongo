@@ -1,21 +1,22 @@
 package org.quemepongo.Models;
 
 public class Prenda {
-  private TipoPrenda tipoPrenda;
-  private Color colorPrincipal;
-  private Color colorSecundario;
-  private Material material;
+  protected TipoPrenda tipoPrenda;
+  protected Trama trama = Trama.LISA;
+  protected Color colorPrincipal;
+  protected Color colorSecundario;
+  protected Material material;
 
-  public Prenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal, Color colorSecundario) {
+  public Prenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal, Color colorSecundario, Trama trama) {
     validarCampos(tipoPrenda, material, colorPrincipal);
     this.tipoPrenda = tipoPrenda;
     this.colorPrincipal = colorPrincipal;
     this.material = material;
     this.colorSecundario = colorSecundario;
+    if (trama != null) this.trama = trama;
   }
 
-  public Prenda(TipoPrenda tipoPrenda, Material material, Color colorPrincipal) {
-    this(tipoPrenda, material, colorPrincipal, null);
+  protected Prenda() {
   }
 
   private void validarCampos(TipoPrenda tipoPrenda, Material material, Color colorPrincipal) {
@@ -42,5 +43,9 @@ public class Prenda {
 
   public Boolean esAccesorio() {
     return tipoPrenda.getCategoria() == Categoria.ACCESORIO;
+  }
+
+  public Trama getTrama() {
+    return trama;
   }
 }
