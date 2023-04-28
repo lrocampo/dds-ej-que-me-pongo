@@ -2,9 +2,9 @@ package org.quemepongo.Models;
 
 public class PrendaBorrador extends Prenda {
 
-  public PrendaBorrador(Prenda prenda) {
-    super(prenda.tipoPrenda, prenda.material, prenda.colorPrincipal, prenda.colorSecundario, prenda.trama);
-  }
+//  public PrendaBorrador(Prenda prenda) {
+//    super(prenda.tipoPrenda, prenda.material, prenda.colorPrincipal, prenda.colorSecundario, prenda.trama);
+//  }
 
   public PrendaBorrador() {
   }

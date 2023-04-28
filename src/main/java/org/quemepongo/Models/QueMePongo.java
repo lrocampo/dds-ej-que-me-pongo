@@ -9,8 +9,7 @@ public class QueMePongo {
   private List<Prenda> prendas = new ArrayList<>();
 
   // Si bien dice uniformes, cual es la diferencia entre un atuendo y un uniforme?
-  // porque (a menos que el dominio lo restrinja)
-  // puede pasar que 2 colegios podrian usar los mismos colores y prendas
+  // comportamiento diferencial?
   private Set<Atuendo> sugerencias = new HashSet<>();
   private PrendaBorrador prendaBorrador = new PrendaBorrador();
 
@@ -28,7 +27,7 @@ public class QueMePongo {
 
   /*  CONSULTAR  (ó puede ser un borrador que creo y se guarda la ref hasta que decido convertirlo en prenda?) */
   public PrendaBorrador getPrendaBorrador() {
-   return prendaBorrador;
+    return prendaBorrador;
   }
 
   /*  CONSULTAR  (si cargo de esta manera, no corro el riesgo de quedar con el sistema inconsistente?
