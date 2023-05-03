@@ -1,5 +1,4 @@
 @startuml
-
 enum Material {
     CUERO
     JEAN
@@ -14,30 +13,60 @@ enum Color {
 }
 
 enum TipoPrenda {
-    ZAPATOS
-    PANTALON
-    REMERA_MANGAS_CORTAS
-    MUSCULOSA
-    ANTEOJOS
-    PANUELO
-    BOTAS
-    POLLERA
-    ZAPATILLAS
-    CROCS
+  PANTALON
+  REMERA_MANGAS_CORTAS
+  BOTAS
+  PANUELO
  getCategoria()
+}
+
+enum Trama {
+ LISA
+ RAYADA
+ ESTAMPADO
+ LUNARES
+ CUADROS
+}
+
+enum Categoria {
+ PARTE_SUPERIOR
+ PARTE_INFERIOR
+ CALZADO
+ ACCESORIO
 }
 
 class Prenda {
  getCategoria()
 }
 
-class QueMePongo {
- cargarPrenda(prenda)
+class PrendaBorrador extends Prenda{
+ finalizarBorrador()
 }
 
-Tipo <-- Prenda
+class Atuendo {
+ parteSuperior
+ parteInferior
+ calzado
+ accesorios
+ agregarAccesorio(accesorio)
+}
+
+class QueMePongo {
+ cargarPrenda(prenda)
+ cargarSugerencia(uniforme)
+}
+
+class Institucion {
+ uniforme
+}
+
+TipoPrenda <-- Prenda
 Material <-- Prenda
 Color <-- Prenda
+Trama <-- Prenda
+Categoria <-- TipoPrenda
+Atuendo <-- Institucion
+PrendaBorrador <-- QueMePongo
 Prenda " * " <-- " 1 " QueMePongo
-
+Atuendo " * " <-- " 1 " QueMePongo
 @enduml
