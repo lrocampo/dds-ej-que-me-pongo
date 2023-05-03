@@ -36,6 +36,11 @@ enum Categoria {
 }
 
 class Prenda {
+ tipo
+ material
+ trama
+ colorPrincipal
+ colorSecundario
  getCategoria()
 }
 
@@ -56,13 +61,27 @@ class Atuendo {
  agregarAccesorio(accesorio)
 }
 
+class Uniforme {
+ parteSuperior
+ parteInferior
+ calzado
+}
 
+abstract class Sastre {
+ fabricarUniforme()
+ fabricarParteSuperior()
+ fabricarParteInferior()
+ fabricarCalzado()
+}
+
+Sastre ..> Uniforme
+Uniforme --> Prenda
 TipoPrenda <-- Prenda
-Prenda <-- Atuendo
+Prenda <- Atuendo
 Guardarropas --> Prenda
-Prenda -> Material
+Prenda --> Material
 Color <- Prenda
 Prenda --> Trama
-Categoria <- TipoPrenda
+Categoria <-- TipoPrenda
 PrendaBorrador ..> Prenda
 @enduml
