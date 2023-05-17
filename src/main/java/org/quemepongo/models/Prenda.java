@@ -7,19 +7,20 @@ public class Prenda {
   private Color colorSecundario;
   private Material material;
 
+  private Formalidad formalidad;
+
   public Prenda(TipoPrenda tipoPrenda,
                 Material material,
                 Color colorPrincipal,
                 Color colorSecundario,
-                Trama trama) {
+                Trama trama,
+                Formalidad formalidad) {
     this.tipoPrenda = tipoPrenda;
     this.colorPrincipal = colorPrincipal;
     this.material = material;
     this.colorSecundario = colorSecundario;
     this.trama = trama;
-  }
-
-  protected Prenda() {
+    this.formalidad = formalidad;
   }
 
   public Categoria getCategoria() {
@@ -44,5 +45,9 @@ public class Prenda {
 
   public Trama getTrama() {
     return trama;
+  }
+
+  public boolean esFormal() {
+    return formalidad == Formalidad.FORMAL;
   }
 }

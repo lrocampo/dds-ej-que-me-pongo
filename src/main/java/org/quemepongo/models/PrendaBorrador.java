@@ -8,6 +8,7 @@ public class PrendaBorrador {
   private Color colorPrincipal;
   private Color colorSecundario;
   private Material material;
+  private Formalidad formalidad;
 
   public PrendaBorrador(TipoPrenda tipoPrenda) {
     this.tipoPrenda = tipoPrenda;
@@ -33,14 +34,22 @@ public class PrendaBorrador {
     return this;
   }
 
+  public PrendaBorrador conFormalidad(Formalidad formalidad) {
+    this.formalidad = formalidad;
+    return this;
+  }
+
   public Prenda construirPrenda() {
     validarCamposRequeridos();
-    return new Prenda(tipoPrenda, material, colorPrincipal, colorSecundario, trama);
+    return new Prenda(tipoPrenda, material, colorPrincipal, colorSecundario, trama, formalidad);
   }
 
   private void validarCamposRequeridos() {
     if (tipoPrenda == null) {
       throw new IllegalArgumentException("El campo tipo de prenda es requerido");
+    }
+    if(formalidad == null) {
+      throw new IllegalArgumentException("El campo formalidad es requerido");
     }
     if (colorPrincipal == null) {
       throw new IllegalArgumentException("El campo color principal es requerido");
@@ -49,6 +58,5 @@ public class PrendaBorrador {
       throw new IllegalArgumentException("El campo material es requerido");
     }
   }
-
 
 }

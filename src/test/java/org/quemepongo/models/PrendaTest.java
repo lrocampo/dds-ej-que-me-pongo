@@ -42,12 +42,15 @@ public class PrendaTest {
   }
 
   private PrendaBorrador borradorConTipo() {
-    return new PrendaBorrador(TipoPrenda.REMERA_MANGAS_CORTAS).conMaterial(Material.ALGODON);
+    return new PrendaBorrador(TipoPrenda.REMERA_MANGAS_CORTAS)
+            .conMaterial(Material.ALGODON)
+            .conFormalidad(Formalidad.INFORMAL);
   }
 
   private PrendaBorrador borradorCompleto() {
     return borradorConTipo().conColorPrincipal(Color.VERDE)
                             .conColorSecundario(Color.AMARILLO)
+                            .conFormalidad(Formalidad.INFORMAL)
                             .conTrama(Trama.CUADROS);
   }
 

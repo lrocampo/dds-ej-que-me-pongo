@@ -45,24 +45,28 @@ public class AtuendoTest {
     return new PrendaBorrador(TipoPrenda.REMERA_MANGAS_CORTAS)
         .conMaterial(Material.ALGODON)
         .conColorPrincipal(Color.VERDE)
+        .conFormalidad(Formalidad.INFORMAL)
         .construirPrenda();
   }
   private Prenda unaParteInferior() {
     return new PrendaBorrador(TipoPrenda.PANTALON)
         .conMaterial(Material.ALGODON)
         .conColorPrincipal(Color.VERDE)
+        .conFormalidad(Formalidad.FORMAL)
         .construirPrenda();
   }
   private Prenda unCalzado() {
     return new PrendaBorrador(TipoPrenda.BOTAS)
         .conMaterial(Material.CUERO)
         .conColorPrincipal(Color.VERDE)
+        .conFormalidad(Formalidad.NEUTRA)
         .construirPrenda();
   }
   private Prenda unAccesorio() {
     return new PrendaBorrador(TipoPrenda.PANUELO)
         .conMaterial(Material.ALGODON)
         .conColorPrincipal(Color.VERDE)
+        .conFormalidad(Formalidad.NEUTRA)
         .construirPrenda();
   }
 }
