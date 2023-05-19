@@ -67,6 +67,7 @@ Prenda <.. MotorDeSugerencias
 MotorDeSugerencias <|.. MotorDeSugerenciasClimatico 
 ServicioClima <- ProveedorDeClima
 ServicioClima ..|> ServicioAccuWeather  
+MotorDeSugerenciasClimatico -> ServicioClima
 MotorDeSugerencias <- ProveedorDeMotor
 Prenda --> Trama
 Categoria <- TipoPrenda
