@@ -52,4 +52,8 @@ public class Prenda {
   public boolean esFormal() {
     return formalidad == Formalidad.FORMAL;
   }
+
+  public boolean esApta(Temperatura temperatura) {
+    return tipoPrenda.esApta(temperatura);
+  }
 }
