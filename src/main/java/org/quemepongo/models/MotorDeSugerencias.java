@@ -1,7 +1,7 @@
 package org.quemepongo.models;
 
 import com.google.common.collect.Lists;
-import org.quemepongo.utils.DomainException;
+import org.quemepongo.exceptions.DomainException;
 
 import java.util.List;
 

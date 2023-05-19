@@ -3,6 +3,8 @@ package org.quemepongo.models;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.quemepongo.enums.*;
+import org.quemepongo.utils.PrendaBorrador;
 
 public class PrendaTest {
 

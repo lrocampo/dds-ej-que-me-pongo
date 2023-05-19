@@ -1,4 +1,4 @@
-package org.quemepongo.models;
+package org.quemepongo.enums;
 
 public enum Formalidad {
     FORMAL,

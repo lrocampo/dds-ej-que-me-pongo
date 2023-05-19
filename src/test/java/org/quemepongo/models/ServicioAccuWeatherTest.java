@@ -8,7 +8,9 @@ import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.quemepongo.utils.DomainException;
+import org.quemepongo.apis.AccuWeatherAPI;
+import org.quemepongo.exceptions.DomainException;
+import org.quemepongo.services.ServicioAccuWeather;
 
 class ServicioAccuWeatherTest {
 

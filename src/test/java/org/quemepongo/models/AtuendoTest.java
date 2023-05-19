@@ -3,6 +3,11 @@ package org.quemepongo.models;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.quemepongo.enums.Color;
+import org.quemepongo.enums.Formalidad;
+import org.quemepongo.enums.Material;
+import org.quemepongo.enums.TipoPrenda;
+import org.quemepongo.utils.PrendaBorrador;
 
 public class AtuendoTest {
 

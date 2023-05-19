@@ -1,10 +1,10 @@
-package org.quemepongo.models;
+package org.quemepongo.enums;
 
 
-import static org.quemepongo.models.Categoria.ACCESORIO;
-import static org.quemepongo.models.Categoria.CALZADO;
-import static org.quemepongo.models.Categoria.PARTE_INFERIOR;
-import static org.quemepongo.models.Categoria.PARTE_SUPERIOR;
+import static org.quemepongo.enums.Categoria.ACCESORIO;
+import static org.quemepongo.enums.Categoria.CALZADO;
+import static org.quemepongo.enums.Categoria.PARTE_INFERIOR;
+import static org.quemepongo.enums.Categoria.PARTE_SUPERIOR;
 
 public enum TipoPrenda {
   PANTALON(PARTE_INFERIOR),

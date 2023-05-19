@@ -1,4 +1,7 @@
-package org.quemepongo.models;
+package org.quemepongo.utils;
+
+import org.quemepongo.enums.*;
+import org.quemepongo.models.Prenda;
 
 public class PrendaBorrador {
 

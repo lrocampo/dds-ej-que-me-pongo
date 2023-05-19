@@ -1,9 +1,14 @@
 package org.quemepongo.models;
 
 import org.junit.jupiter.api.Test;
-import org.quemepongo.utils.DomainException;
+import org.quemepongo.enums.Color;
+import org.quemepongo.enums.Formalidad;
+import org.quemepongo.enums.Material;
+import org.quemepongo.enums.TipoPrenda;
+import org.quemepongo.exceptions.DomainException;
 
 import java.util.List;
+import org.quemepongo.utils.PrendaBorrador;
 
 import static org.junit.jupiter.api.Assertions.*;
 

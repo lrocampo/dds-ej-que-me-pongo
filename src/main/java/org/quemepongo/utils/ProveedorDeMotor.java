@@ -1,4 +1,6 @@
-package org.quemepongo.models;
+package org.quemepongo.utils;
+
+import org.quemepongo.models.MotorDeSugerencias;
 
 public class ProveedorDeMotor {
     static ProveedorDeMotor INSTANCE = new ProveedorDeMotor();

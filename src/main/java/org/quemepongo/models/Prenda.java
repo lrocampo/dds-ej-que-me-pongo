@@ -1,5 +1,7 @@
 package org.quemepongo.models;
 
+import org.quemepongo.enums.*;
+
 public class Prenda {
   private TipoPrenda tipoPrenda;
   private Trama trama;

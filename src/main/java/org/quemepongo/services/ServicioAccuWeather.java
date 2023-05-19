@@ -1,7 +1,11 @@
-package org.quemepongo.models;
+package org.quemepongo.services;
 
 import java.util.Map;
-import org.quemepongo.utils.DomainException;
+import org.quemepongo.apis.AccuWeatherAPI;
+import org.quemepongo.exceptions.DomainException;
+import org.quemepongo.models.Celsius;
+import org.quemepongo.models.Fahrenheit;
+import org.quemepongo.models.Temperatura;
 
 public class ServicioAccuWeather implements ServicioClima {
   private AccuWeatherAPI accuWeatherAPI;
