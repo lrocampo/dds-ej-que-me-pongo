@@ -21,7 +21,7 @@ public enum TipoPrenda {
   TipoPrenda(Categoria categoria, double temperaturaMinima, double temperaturaMaxima) {
     this.categoria = categoria;
     this.temperaturaMinima = temperaturaMinima;
-    this.temperaturaMaxima = temperaturaMaxima
+    this.temperaturaMaxima = temperaturaMaxima;
   }
 
   public Categoria getCategoria() {
