@@ -1,31 +1,17 @@
 @startuml
 enum Material {
-    CUERO
-    JEAN
-    ALGODON
 }
 
 
 enum Color {
-    AZUL
-    VERDE
-    AMARILLO
+
 }
 
 enum TipoPrenda {
-  PANTALON
-  REMERA_MANGAS_CORTAS
-  BOTAS
-  PANUELO
- getCategoria()
+
 }
 
 enum Trama {
- LISA
- RAYADA
- ESTAMPADO
- LUNARES
- CUADROS
 }
 
 enum Categoria {
@@ -39,29 +25,49 @@ class Prenda {
  getCategoria()
 }
 
+class Usuario {
+ generarSugerencias()   
+}
+
+interface MotorDeSugerencias {
+ generarSugerencias()
+ prendasValidas()
+}
+
+class MotorDeSugerenciasClimatico {
+  prendasValidas()
+}
+
 class PrendaBorrador {
  finalizarBorrador()
 }
 
-class Guardarropas {
- prendas
- cargarPrenda()
+interface ServicioClima {
+ getTemperaturaActual()
+}
+
+class ServicioAccuWeather {
+  getTemperaturaActual()
 }
 
 class Atuendo {
- parteSuperior
- parteInferior
- calzado
- accesorios
+
  agregarAccesorio(accesorio)
 }
 
 
-TipoPrenda <-- Prenda
-Prenda <-- Atuendo
-Guardarropas --> Prenda
-Prenda -> Material
-Color <- Prenda
+TipoPrenda <- Prenda
+Atuendo --> Prenda
+Prenda --> Material
+Prenda --> Color
+Prenda <- Usuario
+Atuendo <.. Usuario
+Usuario --> MotorDeSugerencias
+Prenda <.. MotorDeSugerencias
+MotorDeSugerencias <|.. MotorDeSugerenciasClimatico 
+ServicioClima <- ProveedorDeClima
+ServicioClima ..|> ServicioAccuWeather  
+MotorDeSugerencias <- ProveedorDeMotor
 Prenda --> Trama
 Categoria <- TipoPrenda
 PrendaBorrador ..> Prenda
