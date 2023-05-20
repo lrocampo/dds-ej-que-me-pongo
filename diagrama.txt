@@ -8,7 +8,7 @@ enum Color {
 }
 
 enum TipoPrenda {
-
+ esApta()
 }
 
 enum Trama {
@@ -23,10 +23,11 @@ enum Categoria {
 
 class Prenda {
  getCategoria()
+ esApta()
 }
 
 class Usuario {
- generarSugerencias()   
+ generarSugerencias()
 }
 
 interface MotorDeSugerencias {
@@ -48,6 +49,7 @@ interface ServicioClima {
 
 class ServicioAccuWeather {
   getTemperaturaActual()
+  getCondicionesClimaticas()
 }
 
 class Atuendo {
@@ -64,9 +66,9 @@ Prenda <- Usuario
 Atuendo <.. Usuario
 Usuario --> MotorDeSugerencias
 Prenda <.. MotorDeSugerencias
-MotorDeSugerencias <|.. MotorDeSugerenciasClimatico 
+MotorDeSugerencias <|.. MotorDeSugerenciasClimatico
 ServicioClima <- ProveedorDeClima
-ServicioClima ..|> ServicioAccuWeather  
+ServicioClima <|.. ServicioAccuWeather
 MotorDeSugerenciasClimatico -> ServicioClima
 MotorDeSugerencias <- ProveedorDeMotor
 Prenda --> Trama
