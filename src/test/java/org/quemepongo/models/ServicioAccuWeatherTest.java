@@ -53,6 +53,7 @@ class ServicioAccuWeatherTest {
   private List<Map<String, Object>> dataCorrecta() {
     return Arrays.asList(new HashMap<>() {
       {
+        put("PrecipitationProbability", 0);
         put("Temperature", new HashMap<String, Object>() {{
           put("Value", 57);
           put("Unit", "F");
@@ -65,6 +66,7 @@ class ServicioAccuWeatherTest {
   private List<Map<String, Object>> dataIncorrecta() {
     return Arrays.asList(new HashMap<>() {
       {
+        put("PrecipitationProbability", 0);
         put("Temperature", new HashMap<String, Object>() {{
           put("Value", 57);
           put("Unit", "M");
