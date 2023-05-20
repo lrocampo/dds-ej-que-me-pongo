@@ -11,11 +11,11 @@ public class ProveedorDeClima {
     return INSTANCE;
   }
 
-  public ServicioClima getMotor(){
+  public ServicioClima getServicioClima(){
     return servicioClima;
   }
 
-  public void setMotor(ServicioClima motor){
-    this.servicioClima = motor;
+  public void setServicioClima(ServicioClima servicioClima){
+    this.servicioClima = servicioClima;
   }
 }
