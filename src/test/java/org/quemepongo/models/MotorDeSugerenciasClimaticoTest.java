@@ -22,23 +22,26 @@ class MotorDeSugerenciasClimaticoTest {
   public void setUp() {
     servicioAccuWeather = Mockito.mock(ServicioAccuWeather.class);
     motorDeSugerenciasClimatico = new MotorDeSugerenciasClimatico(servicioAccuWeather);
-    usuario = new Usuario(
+    Guardarropas guardarropas = new Guardarropas(
         List.of(unBuzo(), unaCampera(), unaParteInferior(), unCalzado()),
-        20,
-        motorDeSugerenciasClimatico
+        "c",
+        motorDeSugerenciasClimatico);
+    usuario = new Usuario(
+        List.of(guardarropas),
+        20
     );
   }
 
   @Test
   void deberiaGenerarTodasLasSugerenciasParaTemperaturaBaja() {
     Mockito.when(servicioAccuWeather.getTemperaturaActual()).thenReturn(temperaturaBaja());
-    assertEquals(2, usuario.generarSugerencias().size());
+    assertEquals(2, usuario.generarSugerencias("c").size());
   }
 
   @Test
   void deberiaGenerarTodasLasSugerenciasPosiblesParaTemperaturaAlta() {
     Mockito.when(servicioAccuWeather.getTemperaturaActual()).thenReturn(temperaturaAlta());
-    assertEquals(0, usuario.generarSugerencias().size());
+    assertEquals(0, usuario.generarSugerencias("c").size());
   }
 
   private Prenda unBuzo() {

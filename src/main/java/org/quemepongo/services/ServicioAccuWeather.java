@@ -10,13 +10,13 @@ import org.quemepongo.models.Temperatura;
 
 public class ServicioAccuWeather implements ServicioClima {
   private AccuWeatherAPI accuWeatherAPI;
-  private String CIUDAD = "Buenos Aires, Argentina";
 
   public ServicioAccuWeather(AccuWeatherAPI accuWeatherAPI) {
     this.accuWeatherAPI = accuWeatherAPI;
   }
 
   public CondicionClimatica getCondicionesClimaticas() {
+    String CIUDAD = "Buenos Aires, Argentina";
     return accuWeatherAPI.getWeather(CIUDAD).stream()
         .findFirst()
         .map((condicionClimatica) -> new CondicionClimatica(

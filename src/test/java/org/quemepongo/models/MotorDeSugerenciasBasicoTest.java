@@ -22,16 +22,18 @@ class MotorDeSugerenciasBasicoTest {
                 unaParteSuperior(Formalidad.NEUTRA),
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
-        Usuario usuario = new Usuario(prendaList, 22, new MotorDeSugerenciasBasico());
-        assertEquals(8, usuario.generarSugerencias().size());
+        Guardarropas guardarropas = new Guardarropas(prendaList, "c", new MotorDeSugerenciasBasico());
+        Usuario usuario = new Usuario(List.of(guardarropas), 22);
+        assertEquals(8, usuario.generarSugerencias("c").size());
     }
 
     @Test
     void noDeberiaGenerarTodasLasSugerencias() {
         List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
                 unaParteInferior(Formalidad.INFORMAL));
-        Usuario usuario = new Usuario(prendaList, 22, new MotorDeSugerenciasBasico());
-        assertEquals(0, usuario.generarSugerencias().size());
+        Guardarropas guardarropas = new Guardarropas(prendaList, "c", new MotorDeSugerenciasBasico());
+        Usuario usuario = new Usuario(List.of(guardarropas), 22);
+        assertEquals(0, usuario.generarSugerencias("c").size());
     }
 
     @Test
@@ -42,7 +44,8 @@ class MotorDeSugerenciasBasicoTest {
                 unaParteSuperior(Formalidad.NEUTRA),
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
-        Usuario usuario = new Usuario(prendaList, 22, new MotorDeSugerenciasBasico());
+        Guardarropas guardarropas = new Guardarropas(prendaList, "c", new MotorDeSugerenciasBasico());
+        Usuario usuario = new Usuario(List.of(guardarropas), 22);
         assertDoesNotThrow(usuario::generarSugerencia);
     }
 
@@ -50,7 +53,8 @@ class MotorDeSugerenciasBasicoTest {
     void noDeberiaGenerarUnaSugerencia() {
         List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
                 unaParteInferior(Formalidad.INFORMAL));
-        Usuario usuario = new Usuario(prendaList, 22, new MotorDeSugerenciasBasico());
+        Guardarropas guardarropas = new Guardarropas(prendaList, "c", new MotorDeSugerenciasBasico());
+        Usuario usuario = new Usuario(List.of(guardarropas), 22);
         assertThrows(DomainException.class, usuario::generarSugerencia);
     }
 

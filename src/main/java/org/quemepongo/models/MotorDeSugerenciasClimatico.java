@@ -11,8 +11,8 @@ public class MotorDeSugerenciasClimatico extends MotorDeSugerencias {
   }
 
   @Override
-  public List<Prenda> getPrendasValidas(Usuario usuario) {
+  public List<Prenda> getPrendasValidas(Usuario usuario, List<Prenda> prendas) {
     Temperatura temperatura = servicioClima.getTemperaturaActual();
-    return usuario.getPrendas().stream().filter(prenda -> prenda.esApta(temperatura)).toList();
+    return prendas.stream().filter(prenda -> prenda.esApta(temperatura)).toList();
   }
 }

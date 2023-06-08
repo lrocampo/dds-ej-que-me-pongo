@@ -4,7 +4,7 @@ import java.util.List;
 
 public class MotorDeSugerenciasBasico extends MotorDeSugerencias{
     @Override
-    public List<Prenda> getPrendasValidas(Usuario usuario) {
-        return usuario.getPrendas();
+    public List<Prenda> getPrendasValidas(Usuario usuario, List<Prenda> prendas) {
+        return prendas;
     }
 }
