@@ -3,12 +3,12 @@ package org.quemepongo.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Guardarropas {
+public class Guardarropa {
   private List<Prenda> prendas = new ArrayList<>();
   private String criterio;
   private MotorDeSugerencias motorDeSugerencias;
 
-  public Guardarropas(List<Prenda> prendas, String criterio, MotorDeSugerencias motorDeSugerencias) {
+  public Guardarropa(List<Prenda> prendas, String criterio, MotorDeSugerencias motorDeSugerencias) {
     this.prendas = prendas;
     this.criterio = criterio;
     this.motorDeSugerencias = motorDeSugerencias;

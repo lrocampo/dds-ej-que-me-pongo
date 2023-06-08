@@ -2,34 +2,58 @@ package org.quemepongo.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.quemepongo.exceptions.DomainException;
 
 public class Usuario {
-    List<Guardarropas> guardarropas = new ArrayList<>();
-    Integer edad;
+  private List<Guardarropa> guardarropas = new ArrayList<>();
+  private List<Guardarropa> guardarropasCompartido = new ArrayList<>();
+  private Integer edad;
 
-    public Usuario(List<Guardarropas> guardarropas, Integer edad) {
-        this.guardarropas = guardarropas;
-        this.edad = edad;
-    }
+  public Usuario(List<Guardarropa> guardarropas, Integer edad) {
+    this.guardarropas = guardarropas;
+    this.edad = edad;
+  }
 
-    List<Sugerencia> generarSugerencias(String criterio){
-        return guardarropas.stream()
-            .filter(guardarropa -> guardarropa.getCriterio().equalsIgnoreCase(criterio))
-            .findFirst()
-            .map(guardarropa -> guardarropa.generarSugerencias(this))
-            .orElse(new ArrayList<>());
-    }
+  List<Sugerencia> generarSugerencias(String criterio) {
+    return buscarGuardarropa(criterio)
+        .map(guardarropa -> guardarropa.generarSugerencias(this))
+        .orElse(new ArrayList<>());
+  }
 
-    Sugerencia generarSugerencia() {
-        return guardarropas.stream()
-            .findAny()
-            .map(guardarropa -> guardarropa.generarSugerencia(this))
-            .orElseThrow(() -> new DomainException("No hay guardarropas en el usuario"));
-    }
+  Sugerencia generarSugerencia() {
+    return guardarropas.stream()
+        .findAny()
+        .map(guardarropa -> guardarropa.generarSugerencia(this))
+        .orElseThrow(() -> new DomainException("No hay guardarropas en el usuario"));
+  }
 
-    public Integer getEdad() {
-        return edad;
-    }
+  void compartirGuardarropaCon(Usuario usuario, String criterio) {
+    buscarGuardarropa(criterio)
+        .ifPresentOrElse(usuario::agregarGuardarropaCompartido, () -> {
+          throw new DomainException("No hay guardarropas con ese criterio");
+        });
+  }
 
+  private void agregarGuardarropaCompartido(Guardarropa guardarropa) {
+    this.guardarropasCompartido.add(guardarropa);
+  }
+
+  Optional<Guardarropa> buscarGuardarropa(String criterio) {
+    return guardarropas.stream()
+        .filter(guardarropa -> guardarropa.getCriterio().equalsIgnoreCase(criterio))
+        .findFirst();
+  }
+
+  public Integer getEdad() {
+    return edad;
+  }
+
+  public List<Guardarropa> getGuardarropas() {
+    return guardarropas;
+  }
+
+  public List<Guardarropa> getGuardarropasCompartido() {
+    return guardarropasCompartido;
+  }
 }

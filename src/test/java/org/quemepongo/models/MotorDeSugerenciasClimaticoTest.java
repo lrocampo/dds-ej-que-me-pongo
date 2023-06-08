@@ -3,15 +3,12 @@ package org.quemepongo.models;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.quemepongo.enums.*;
 import org.quemepongo.services.ServicioAccuWeather;
 import org.quemepongo.utils.PrendaBorrador;
-import org.quemepongo.utils.ProveedorDeClima;
-import org.quemepongo.utils.ProveedorDeMotor;
 
 class MotorDeSugerenciasClimaticoTest {
   MotorDeSugerenciasClimatico motorDeSugerenciasClimatico;
@@ -22,7 +19,7 @@ class MotorDeSugerenciasClimaticoTest {
   public void setUp() {
     servicioAccuWeather = Mockito.mock(ServicioAccuWeather.class);
     motorDeSugerenciasClimatico = new MotorDeSugerenciasClimatico(servicioAccuWeather);
-    Guardarropas guardarropas = new Guardarropas(
+    Guardarropa guardarropas = new Guardarropa(
         List.of(unBuzo(), unaCampera(), unaParteInferior(), unCalzado()),
         "c",
         motorDeSugerenciasClimatico);

@@ -20,7 +20,7 @@ class MotorDeSugerenciasFormalTest {
                 unaParteSuperior(Formalidad.NEUTRA),
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
-        Guardarropas guardarropas = new Guardarropas(prendaList, "c", new MotorDeSugerenciasFormal());
+        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasFormal());
         Usuario usuario = new Usuario(List.of(guardarropas), 56);
         assertEquals(1, usuario.generarSugerencias("c").size());
     }
@@ -33,7 +33,7 @@ class MotorDeSugerenciasFormalTest {
                 unaParteSuperior(Formalidad.NEUTRA),
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
-        Guardarropas guardarropas = new Guardarropas(prendaList, "c", new MotorDeSugerenciasFormal());
+        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasFormal());
         Usuario usuario = new Usuario(List.of(guardarropas), 54);
         assertEquals(8, usuario.generarSugerencias("c").size());
     }
