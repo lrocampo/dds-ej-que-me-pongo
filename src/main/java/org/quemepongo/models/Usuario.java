@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.quemepongo.exceptions.DomainException;
 
 public class Usuario {
-  private List<Guardarropa> guardarropas = new ArrayList<>();
+  private List<Guardarropa> guardarropas;
   private List<Guardarropa> guardarropasCompartido = new ArrayList<>();
   private Integer edad;
+  private List<PropuestaModificacion> propuestas = new ArrayList<>();
 
   public Usuario(List<Guardarropa> guardarropas, Integer edad) {
     this.guardarropas = guardarropas;
@@ -55,5 +56,30 @@ public class Usuario {
 
   public List<Guardarropa> getGuardarropasCompartido() {
     return guardarropasCompartido;
+  }
+
+  public List<PropuestaModificacion> getPropuestasPendientes() {
+    return propuestas.stream().filter(propuesta -> !propuesta.isAceptada()).toList();
+  }
+
+  public void aceptarPropuesta(PropuestaModificacion propuesta) {
+    propuesta.aplicar();
+  }
+
+  public void rechazarPropuesta(PropuestaModificacion propuesta) {
+    propuestas.remove(propuesta);
+  }
+
+  public void deshacerPropuesta(PropuestaModificacion propuesta) {
+    propuesta.deshacer();
+    propuestas.remove(propuesta);
+  }
+
+  public void agregarPropuesta(PropuestaModificacion propuesta) {
+    propuestas.add(propuesta);
+  }
+
+  public void proponerModificacion(PropuestaModificacion propuesta, Usuario usuario) {
+    usuario.agregarPropuesta(propuesta);
   }
 }
