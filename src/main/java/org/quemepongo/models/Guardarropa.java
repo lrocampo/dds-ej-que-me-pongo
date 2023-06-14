@@ -8,14 +8,17 @@ public class Guardarropa {
   private String criterio;
   private MotorDeSugerencias motorDeSugerencias;
 
-  public Guardarropa(List<Prenda> prendas, String criterio, MotorDeSugerencias motorDeSugerencias) {
+  public Guardarropa(List<Prenda> prendas, MotorDeSugerencias motorDeSugerencias) {
     this.prendas = new ArrayList<>(prendas);
-    this.criterio = criterio;
     this.motorDeSugerencias = motorDeSugerencias;
   }
 
   public String getCriterio() {
     return criterio;
+  }
+
+  public void setCriterio(String criterio) {
+    this.criterio = criterio;
   }
 
   public List<Sugerencia> generarSugerencias(Usuario usuario) {

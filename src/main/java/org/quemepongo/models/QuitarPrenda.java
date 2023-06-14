@@ -7,9 +7,8 @@ public class QuitarPrenda extends PropuestaModificacion {
   }
 
   @Override
-  public void aplicar() {
+  public void efecto() {
     guardarropa.quitarPrenda(prenda);
-    aceptada = true;
   }
 
   @Override

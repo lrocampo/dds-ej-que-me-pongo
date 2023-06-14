@@ -6,9 +6,8 @@ public class AgregarPrenda extends PropuestaModificacion {
   }
 
   @Override
-  public void aplicar() {
+  public void efecto() {
     guardarropa.cargarPrenda(prenda);
-    aceptada = true;
   }
 
   @Override
