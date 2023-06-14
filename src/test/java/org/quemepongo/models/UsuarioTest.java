@@ -20,37 +20,32 @@ class UsuarioTest {
   @BeforeEach
   void setUp() {
     prenda = unaPrenda();
-    guardarropaEntreCasa = new Guardarropa(List.of(prenda), "Ropa de Entrecasa Compartida", new MotorDeSugerenciasBasico());
+    guardarropaEntreCasa = new Guardarropa(List.of(prenda), new MotorDeSugerenciasBasico());
     usuario1 = new Usuario(22);
     usuario1.agregarGuardarropa(guardarropaEntreCasa);
     usuario2 = new Usuario(22);
   }
 
   @Test
-  void unUsuarioPuedeProponerAgregarUnaPrendaAOtroUsuario() {
-    PropuestaModificacion propuesta = new AgregarPrenda(guardarropaEntreCasa, unaPrenda());
+  void sePuedeProponerAgregarUnaPrendaAUnUsuario() {
 
-    usuario2.proponerModificacion(propuesta, usuario1);
+    usuario1.agregarPrendaTentativa(prenda, guardarropaEntreCasa);
 
-    assertEquals(propuesta, usuario1.getPropuestasPendientes().get(0));
+    assertEquals(1, usuario1.getPropuestasPendientes().size());
   }
 
   @Test
   void unUsuarioPuedeProponerQuitarUnaPrendaAOtroUsuario() {
-    PropuestaModificacion propuesta = new QuitarPrenda(guardarropaEntreCasa, prenda);
+    usuario1.removerPrendaTentativa(prenda, guardarropaEntreCasa);
 
-    usuario2.proponerModificacion(propuesta, usuario1);
-
-    assertEquals(propuesta, usuario1.getPropuestasPendientes().get(0));
+    assertEquals(1, usuario1.getPropuestasPendientes().size());
   }
 
   @Test
   void unUsuarioPuedeAceptarPropuestas() {
-    PropuestaModificacion propuesta = new AgregarPrenda(guardarropaEntreCasa, prenda);
+    usuario1.agregarPrendaTentativa(prenda, guardarropaEntreCasa);
 
-    usuario2.proponerModificacion(propuesta, usuario1);
-
-    usuario1.getPropuestasPendientes().forEach(usuario1::aceptarPropuesta);
+    usuario1.getPropuestasPendientes().get(0).aplicar();
 
     assertEquals(0, usuario1.getPropuestasPendientes().size());
     assertTrue(guardarropaEntreCasa.getPrendas().contains(prenda));
@@ -59,11 +54,9 @@ class UsuarioTest {
   @Test
   void unUsuarioPuedeRechazarPropuestas() {
     Prenda otraPrenda = unaPrenda();
-    PropuestaModificacion propuesta = new AgregarPrenda(guardarropaEntreCasa, otraPrenda);
+    usuario1.agregarPrendaTentativa(unaPrenda(), guardarropaEntreCasa);
 
-    usuario2.proponerModificacion(propuesta, usuario1);
-
-    usuario1.getPropuestasPendientes().forEach(usuario1::rechazarPropuesta);
+    usuario1.getPropuestasPendientes().forEach(PropuestaModificacion::rechazar);
 
     assertEquals(0, usuario1.getPropuestasPendientes().size());
     assertFalse(guardarropaEntreCasa.getPrendas().contains(otraPrenda));
@@ -71,42 +64,31 @@ class UsuarioTest {
 
   @Test
   void unUsuarioPuedeDeshacerAgregarUnaPrenda() {
-    PropuestaModificacion propuesta1 = new AgregarPrenda(guardarropaEntreCasa, prenda);
-    PropuestaModificacion propuesta2 = new AgregarPrenda(guardarropaEntreCasa, prenda);
+    usuario1.agregarPrendaTentativa(prenda, guardarropaEntreCasa);
+    usuario1.agregarPrendaTentativa(prenda, guardarropaEntreCasa);
 
-
-    usuario2.proponerModificacion(propuesta1, usuario1);
-    usuario2.proponerModificacion(propuesta2, usuario1);
-
-    usuario1.getPropuestasPendientes().forEach(usuario1::aceptarPropuesta);
-
-    usuario1.deshacerPropuesta(propuesta2);
+    usuario1.getPropuestasPendientes().forEach(PropuestaModificacion::aplicar);
+    usuario1.getPropuestasAceptadas().get(0).deshacer();
 
     assertEquals(2, guardarropaEntreCasa.getPrendas().size());
   }
 
   @Test
   void unUsuarioPuedeDeshacerQuitarUnaPrenda() {
-    PropuestaModificacion propuesta1 = new AgregarPrenda(guardarropaEntreCasa, prenda);
-    PropuestaModificacion propuesta2 = new QuitarPrenda(guardarropaEntreCasa, prenda);
+    usuario1.agregarPrendaTentativa(prenda, guardarropaEntreCasa);
+    usuario1.removerPrendaTentativa(prenda, guardarropaEntreCasa);
 
-
-    usuario2.proponerModificacion(propuesta1, usuario1);
-    usuario2.proponerModificacion(propuesta2, usuario1);
-
-    usuario1.getPropuestasPendientes().forEach(usuario1::aceptarPropuesta);
-
-    usuario1.deshacerPropuesta(propuesta2);
+    usuario1.getPropuestasPendientes().forEach(PropuestaModificacion::aplicar);
+    usuario1.getPropuestasAceptadas().get(1).deshacer();
 
     assertEquals(2, guardarropaEntreCasa.getPrendas().size());
   }
 
   @Test
   void unUsuarioNoPuedeDeshacerUnaPropuestaQueNoFueAceptada() {
-    PropuestaModificacion propuesta1 = new AgregarPrenda(guardarropaEntreCasa, prenda);
-    usuario2.proponerModificacion(propuesta1, usuario1);
-
-    assertThrows(DomainException.class, () -> {usuario1.deshacerPropuesta(propuesta1);});
+    usuario1.agregarPrendaTentativa(prenda, guardarropaEntreCasa);
+    PropuestaModificacion propuestaModificacion = usuario1.getPropuestasPendientes().get(0);
+    assertThrows(DomainException.class, propuestaModificacion::deshacer);
   }
 
   private Prenda unaPrenda() {

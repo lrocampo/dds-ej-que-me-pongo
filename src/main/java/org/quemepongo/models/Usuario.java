@@ -2,7 +2,6 @@ package org.quemepongo.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.quemepongo.exceptions.DomainException;
 
 public class Usuario {
@@ -14,7 +13,7 @@ public class Usuario {
     this.edad = edad;
   }
 
-  List<Sugerencia> generarSugerencias(String criterio) {
+  List<Sugerencia> generarSugerencias() {
     return guardarropas.stream()
         .flatMap(guardarropa -> guardarropa.generarSugerencias(this).stream()).toList();
   }
@@ -39,27 +38,19 @@ public class Usuario {
   }
 
   public List<PropuestaModificacion> getPropuestasPendientes() {
-    return propuestas.stream().filter(propuesta -> !propuesta.isAceptada()).toList();
+    return propuestas.stream().filter(PropuestaModificacion::isPendiente).toList();
   }
 
-  public void aceptarPropuesta(PropuestaModificacion propuesta) {
-    propuesta.aplicar();
+  public List<PropuestaModificacion> getPropuestasAceptadas() {
+    return propuestas.stream().filter(PropuestaModificacion::isAceptada).toList();
   }
 
-  public void rechazarPropuesta(PropuestaModificacion propuesta) {
-    propuestas.remove(propuesta);
+  void agregarPrendaTentativa(Prenda prenda, Guardarropa guardarropa) {
+    propuestas.add(new AgregarPrenda(guardarropa, prenda));
   }
 
-  public void deshacerPropuesta(PropuestaModificacion propuesta) {
-    propuesta.deshacer();
-    propuestas.remove(propuesta);
+  void removerPrendaTentativa(Prenda prenda, Guardarropa guardarropa) {
+    propuestas.add(new QuitarPrenda(guardarropa, prenda));
   }
 
-  public void agregarPropuesta(PropuestaModificacion propuesta) {
-    propuestas.add(propuesta);
-  }
-
-  public void proponerModificacion(PropuestaModificacion propuesta, Usuario usuario) {
-    usuario.agregarPropuesta(propuesta);
-  }
 }

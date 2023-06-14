@@ -22,22 +22,22 @@ class MotorDeSugerenciasBasicoTest {
                 unaParteSuperior(Formalidad.NEUTRA),
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
-        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico());
+        Guardarropa guardarropas = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
         Usuario usuario = new Usuario(56);
 
         usuario.agregarGuardarropa(guardarropas);
-        assertEquals(8, usuario.generarSugerencias("c").size());
+        assertEquals(8, usuario.generarSugerencias().size());
     }
 
     @Test
     void noDeberiaGenerarTodasLasSugerencias() {
         List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
                 unaParteInferior(Formalidad.INFORMAL));
-        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico());
+        Guardarropa guardarropas = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
         Usuario usuario = new Usuario(56);
 
         usuario.agregarGuardarropa(guardarropas);
-        assertEquals(0, usuario.generarSugerencias("c").size());
+        assertEquals(0, usuario.generarSugerencias().size());
     }
 
     @Test
@@ -48,7 +48,7 @@ class MotorDeSugerenciasBasicoTest {
                 unaParteSuperior(Formalidad.NEUTRA),
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
-        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico());
+        Guardarropa guardarropas = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
         Usuario usuario = new Usuario(56);
 
         usuario.agregarGuardarropa(guardarropas);
@@ -59,7 +59,7 @@ class MotorDeSugerenciasBasicoTest {
     void noDeberiaGenerarUnaSugerencia() {
         List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
                 unaParteInferior(Formalidad.INFORMAL));
-        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico());
+        Guardarropa guardarropas = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
         Usuario usuario = new Usuario(56);
 
         usuario.agregarGuardarropa(guardarropas);

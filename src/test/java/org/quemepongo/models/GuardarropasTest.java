@@ -29,7 +29,7 @@ public class GuardarropasTest {
     List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
         unaParteInferior(Formalidad.INFORMAL),
         unCalzado(Formalidad.INFORMAL));
-    Guardarropa guardarropaEntreCasa = new Guardarropa(prendaList, "Ropa de Entrecasa", new MotorDeSugerenciasBasico());
+    Guardarropa guardarropaEntreCasa = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
     Usuario usuario = new Usuario(22);
     usuario.agregarGuardarropa(guardarropaEntreCasa);
 
@@ -37,19 +37,19 @@ public class GuardarropasTest {
 
     when(motor.generarSugerencias(usuario, prendaList)).thenReturn(sugerencias);
 
-    assertEquals(1, usuario.generarSugerencias("Ropa de Entrecasa").size());
-    assertEquals(sugerencias.get(0), usuario.generarSugerencias("Ropa de Entrecasa").get(0));
+    assertEquals(1, usuario.generarSugerencias().size());
+    assertEquals(sugerencias.get(0), usuario.generarSugerencias().get(0));
   }
 
   @Test
   void sePuedeCompartirGuardarropasConOtros() {
-    Guardarropa guardarropaEntreCasa = new Guardarropa(List.of(), "Ropa de Entrecasa Compartida", new MotorDeSugerenciasBasico());
+    Guardarropa guardarropaEntreCasa = new Guardarropa(List.of(), new MotorDeSugerenciasBasico());
     Usuario usuario1 = new Usuario(22);
     usuario1.agregarGuardarropa(guardarropaEntreCasa);
     Usuario usuario2 = new Usuario(22);
     usuario2.agregarGuardarropa(guardarropaEntreCasa);
 
-    assertEquals("Ropa de Entrecasa Compartida", usuario2.getGuardarropas().get(0).getCriterio());
+    assertEquals(guardarropaEntreCasa, usuario2.getGuardarropas().get(0));
   }
 
   private Prenda unaParteSuperior(Formalidad formalidad) {
