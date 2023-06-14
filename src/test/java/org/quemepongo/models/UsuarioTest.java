@@ -21,8 +21,9 @@ class UsuarioTest {
   void setUp() {
     prenda = unaPrenda();
     guardarropaEntreCasa = new Guardarropa(List.of(prenda), "Ropa de Entrecasa Compartida", new MotorDeSugerenciasBasico());
-    usuario1 = new Usuario(List.of(guardarropaEntreCasa), 22);
-    usuario2 = new Usuario(List.of(), 22);
+    usuario1 = new Usuario(22);
+    usuario1.agregarGuardarropa(guardarropaEntreCasa);
+    usuario2 = new Usuario(22);
   }
 
   @Test

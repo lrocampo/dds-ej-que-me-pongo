@@ -6,20 +6,17 @@ import java.util.Optional;
 import org.quemepongo.exceptions.DomainException;
 
 public class Usuario {
-  private List<Guardarropa> guardarropas;
-  private List<Guardarropa> guardarropasCompartido = new ArrayList<>();
-  private Integer edad;
+  private List<Guardarropa> guardarropas = new ArrayList<>();
   private List<PropuestaModificacion> propuestas = new ArrayList<>();
+  private Integer edad;
 
-  public Usuario(List<Guardarropa> guardarropas, Integer edad) {
-    this.guardarropas = guardarropas;
+  public Usuario(Integer edad) {
     this.edad = edad;
   }
 
   List<Sugerencia> generarSugerencias(String criterio) {
-    return buscarGuardarropa(criterio)
-        .map(guardarropa -> guardarropa.generarSugerencias(this))
-        .orElse(new ArrayList<>());
+    return guardarropas.stream()
+        .flatMap(guardarropa -> guardarropa.generarSugerencias(this).stream()).toList();
   }
 
   Sugerencia generarSugerencia() {
@@ -27,23 +24,6 @@ public class Usuario {
         .findAny()
         .map(guardarropa -> guardarropa.generarSugerencia(this))
         .orElseThrow(() -> new DomainException("No hay guardarropas en el usuario"));
-  }
-
-  void compartirGuardarropaCon(Usuario usuario, String criterio) {
-    buscarGuardarropa(criterio)
-        .ifPresentOrElse(usuario::agregarGuardarropaCompartido, () -> {
-          throw new DomainException("No hay guardarropas con ese criterio");
-        });
-  }
-
-  private void agregarGuardarropaCompartido(Guardarropa guardarropa) {
-    this.guardarropasCompartido.add(guardarropa);
-  }
-
-  Optional<Guardarropa> buscarGuardarropa(String criterio) {
-    return guardarropas.stream()
-        .filter(guardarropa -> guardarropa.getCriterio().equalsIgnoreCase(criterio))
-        .findFirst();
   }
 
   public Integer getEdad() {
@@ -54,8 +34,8 @@ public class Usuario {
     return guardarropas;
   }
 
-  public List<Guardarropa> getGuardarropasCompartido() {
-    return guardarropasCompartido;
+  public void agregarGuardarropa(Guardarropa guardarropa) {
+    guardarropas.add(guardarropa);
   }
 
   public List<PropuestaModificacion> getPropuestasPendientes() {

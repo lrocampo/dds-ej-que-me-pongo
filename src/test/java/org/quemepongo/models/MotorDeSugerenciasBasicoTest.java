@@ -23,7 +23,9 @@ class MotorDeSugerenciasBasicoTest {
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
         Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico());
-        Usuario usuario = new Usuario(List.of(guardarropas), 22);
+        Usuario usuario = new Usuario(56);
+
+        usuario.agregarGuardarropa(guardarropas);
         assertEquals(8, usuario.generarSugerencias("c").size());
     }
 
@@ -32,7 +34,9 @@ class MotorDeSugerenciasBasicoTest {
         List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
                 unaParteInferior(Formalidad.INFORMAL));
         Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico());
-        Usuario usuario = new Usuario(List.of(guardarropas), 22);
+        Usuario usuario = new Usuario(56);
+
+        usuario.agregarGuardarropa(guardarropas);
         assertEquals(0, usuario.generarSugerencias("c").size());
     }
 
@@ -45,7 +49,9 @@ class MotorDeSugerenciasBasicoTest {
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
         Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico());
-        Usuario usuario = new Usuario(List.of(guardarropas), 22);
+        Usuario usuario = new Usuario(56);
+
+        usuario.agregarGuardarropa(guardarropas);
         assertDoesNotThrow(usuario::generarSugerencia);
     }
 
@@ -54,7 +60,9 @@ class MotorDeSugerenciasBasicoTest {
         List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
                 unaParteInferior(Formalidad.INFORMAL));
         Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico());
-        Usuario usuario = new Usuario(List.of(guardarropas), 22);
+        Usuario usuario = new Usuario(56);
+
+        usuario.agregarGuardarropa(guardarropas);
         assertThrows(DomainException.class, usuario::generarSugerencia);
     }
 

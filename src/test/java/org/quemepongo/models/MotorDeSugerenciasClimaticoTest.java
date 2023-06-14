@@ -24,9 +24,9 @@ class MotorDeSugerenciasClimaticoTest {
         "c",
         motorDeSugerenciasClimatico);
     usuario = new Usuario(
-        List.of(guardarropas),
         20
     );
+    usuario.agregarGuardarropa(guardarropas);
   }
 
   @Test
