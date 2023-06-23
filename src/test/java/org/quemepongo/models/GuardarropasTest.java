@@ -1,8 +1,6 @@
 package org.quemepongo.models;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -13,15 +11,20 @@ import org.quemepongo.enums.Color;
 import org.quemepongo.enums.Formalidad;
 import org.quemepongo.enums.Material;
 import org.quemepongo.enums.TipoPrenda;
+import org.quemepongo.services.ServicioClima;
 import org.quemepongo.utils.PrendaBorrador;
 
 public class GuardarropasTest {
 
   MotorDeSugerencias motor;
+  ServicioClima servicioClima;
 
   @BeforeEach
   public void setUp() {
+    servicioClima = Mockito.mock(ServicioClima.class);
     motor = Mockito.mock(MotorDeSugerenciasBasico.class);
+
+    when(servicioClima.getTemperaturaActual()).thenReturn(new Celsius(20));
   }
 
   @Test
@@ -29,7 +32,7 @@ public class GuardarropasTest {
     List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
         unaParteInferior(Formalidad.INFORMAL),
         unCalzado(Formalidad.INFORMAL));
-    Guardarropa guardarropaEntreCasa = new Guardarropa(prendaList, "Ropa de Entrecasa", new MotorDeSugerenciasBasico());
+    Guardarropa guardarropaEntreCasa = new Guardarropa(prendaList,  "Ropa de Entrecasa", new MotorDeSugerenciasBasico(), servicioClima);
     Usuario usuario = new Usuario(List.of(guardarropaEntreCasa), 22);
 
     List<Sugerencia> sugerencias = List.of(new Sugerencia(prendaList.get(0), prendaList.get(1), prendaList.get(2)));
@@ -42,7 +45,7 @@ public class GuardarropasTest {
 
   @Test
   void sePuedeCompartirGuardarropasConOtros() {
-    Guardarropa guardarropaEntreCasa = new Guardarropa(List.of(), "Ropa de Entrecasa Compartida", new MotorDeSugerenciasBasico());
+    Guardarropa guardarropaEntreCasa = new Guardarropa(List.of(), "Ropa de Entrecasa Compartida", new MotorDeSugerenciasBasico(), servicioClima);
     Usuario usuario1 = new Usuario(List.of(guardarropaEntreCasa), 22);
     Usuario usuario2 = new Usuario(List.of(), 22);
 

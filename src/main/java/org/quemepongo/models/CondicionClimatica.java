@@ -1,16 +1,16 @@
 package org.quemepongo.models;
 
 public class CondicionClimatica {
-  private double probabilidadPrecipitacion;
+  private Humedad humedad;
   private Temperatura temperatura;
 
-  public CondicionClimatica(double probabilidadPrecipitacion, Temperatura temperatura) {
-    this.probabilidadPrecipitacion = probabilidadPrecipitacion;
+  public CondicionClimatica(Humedad probabilidadPrecipitacion, Temperatura temperatura) {
+    this.humedad = probabilidadPrecipitacion;
     this.temperatura = temperatura;
   }
 
-  public double getProbabilidadPrecipitacion() {
-    return probabilidadPrecipitacion;
+  public Humedad getHumedad() {
+    return humedad;
   }
 
   public Temperatura getTemperatura() {

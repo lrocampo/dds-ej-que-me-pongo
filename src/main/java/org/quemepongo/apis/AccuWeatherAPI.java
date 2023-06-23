@@ -21,4 +21,11 @@ public final class AccuWeatherAPI {
       }});
     }});
   }
+
+  public final Map<String, Object> getAlertas(String ciudad) {
+    return new HashMap<String, Object>() {{
+      put("CurrentAlerts", List.of("storm", "hail"));
+    }};
+  }
+
 }

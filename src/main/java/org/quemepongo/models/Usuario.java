@@ -3,6 +3,7 @@ package org.quemepongo.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.quemepongo.repositories.RepositorioClima;
 import org.quemepongo.exceptions.DomainException;
 
 public class Usuario {
@@ -11,9 +12,27 @@ public class Usuario {
   private Integer edad;
   private List<PropuestaModificacion> propuestas = new ArrayList<>();
 
+  private String mail = "dataentry1@gmail.com";
+
+  private List<Accion> acciones = new ArrayList<>();
+
   public Usuario(List<Guardarropa> guardarropas, Integer edad) {
     this.guardarropas = guardarropas;
     this.edad = edad;
+  }
+
+  public List<Sugerencia> getSugerenciaDiaria() {
+    return guardarropas.stream()
+        .map(guardarropa -> guardarropa.generarSugerenciasDiaria(this))
+        .findFirst().orElse(List.of());
+  }
+
+  public void recibirAlerta(List<Alerta> alertas) {
+    acciones.forEach(accion -> accion.activar(this, alertas));
+  }
+
+  public List<Alerta> obtenerUltAlertas() {
+    return RepositorioClima.get().consultarAlertas("Buenos Aires");
   }
 
   List<Sugerencia> generarSugerencias(String criterio) {
@@ -81,5 +100,9 @@ public class Usuario {
 
   public void proponerModificacion(PropuestaModificacion propuesta, Usuario usuario) {
     usuario.agregarPropuesta(propuesta);
+  }
+
+  public String getMail() {
+    return mail;
   }
 }

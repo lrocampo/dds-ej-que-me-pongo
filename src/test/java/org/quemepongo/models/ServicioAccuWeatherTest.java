@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
+import java.time.Duration;
 import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class ServicioAccuWeatherTest {
   void deberiaObtenerLaTemperaturaActual() {
     Mockito.when(accuWeatherAPI.getWeather(any())).thenReturn(dataCorrecta());
 
-    ServicioAccuWeather servicioAccuWeather = new ServicioAccuWeather(accuWeatherAPI);
+    ServicioAccuWeather servicioAccuWeather = new ServicioAccuWeather(accuWeatherAPI, Duration.ZERO);
 
     assertEquals(57, servicioAccuWeather.getTemperaturaActual().getValor());
 
@@ -34,7 +35,7 @@ class ServicioAccuWeatherTest {
   void cuandoNoHayClimasDisponibles() {
     Mockito.when(accuWeatherAPI.getWeather(any())).thenReturn(List.of());
 
-    ServicioAccuWeather servicioAccuWeather = new ServicioAccuWeather(accuWeatherAPI);
+    ServicioAccuWeather servicioAccuWeather = new ServicioAccuWeather(accuWeatherAPI, Duration.ZERO);
 
     assertThrows(DomainException.class, () -> servicioAccuWeather.getTemperaturaActual().getValor());
 
@@ -44,7 +45,7 @@ class ServicioAccuWeatherTest {
   void cuandoHayTemperaturasConUnidadesInvalidas() {
     Mockito.when(accuWeatherAPI.getWeather(any())).thenReturn(dataIncorrecta());
 
-    ServicioAccuWeather servicioAccuWeather = new ServicioAccuWeather(accuWeatherAPI);
+    ServicioAccuWeather servicioAccuWeather = new ServicioAccuWeather(accuWeatherAPI, Duration.ZERO);
 
     assertThrows(IllegalArgumentException.class, () -> servicioAccuWeather.getTemperaturaActual().getValor());
 
