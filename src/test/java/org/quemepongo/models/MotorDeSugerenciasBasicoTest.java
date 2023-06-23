@@ -1,6 +1,8 @@
 package org.quemepongo.models;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.quemepongo.enums.Color;
 import org.quemepongo.enums.Formalidad;
 import org.quemepongo.enums.Material;
@@ -8,11 +10,22 @@ import org.quemepongo.enums.TipoPrenda;
 import org.quemepongo.exceptions.DomainException;
 
 import java.util.List;
+import org.quemepongo.services.ServicioClima;
 import org.quemepongo.utils.PrendaBorrador;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class MotorDeSugerenciasBasicoTest {
+
+    ServicioClima servicioClima;
+
+    @BeforeEach
+    public void setUp() {
+        servicioClima = Mockito.mock(ServicioClima.class);
+
+        when(servicioClima.getTemperaturaActual()).thenReturn(new Celsius(20));
+    }
 
     @Test
     void deberiaGenerarTodasLasSugerenciasPosibles() {
@@ -22,10 +35,8 @@ class MotorDeSugerenciasBasicoTest {
                 unaParteSuperior(Formalidad.NEUTRA),
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
-        Guardarropa guardarropas = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
-        Usuario usuario = new Usuario(56);
-
-        usuario.agregarGuardarropa(guardarropas);
+        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico(), servicioClima);
+        Usuario usuario = new Usuario(List.of(guardarropas), 22);
         assertEquals(8, usuario.generarSugerencias().size());
     }
 
@@ -33,10 +44,8 @@ class MotorDeSugerenciasBasicoTest {
     void noDeberiaGenerarTodasLasSugerencias() {
         List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
                 unaParteInferior(Formalidad.INFORMAL));
-        Guardarropa guardarropas = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
-        Usuario usuario = new Usuario(56);
-
-        usuario.agregarGuardarropa(guardarropas);
+        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico(), servicioClima);
+        Usuario usuario = new Usuario(List.of(guardarropas), 22);
         assertEquals(0, usuario.generarSugerencias().size());
     }
 
@@ -48,9 +57,8 @@ class MotorDeSugerenciasBasicoTest {
                 unaParteSuperior(Formalidad.NEUTRA),
                 unaParteInferior(Formalidad.NEUTRA),
                 unCalzado(Formalidad.NEUTRA));
-        Guardarropa guardarropas = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
-        Usuario usuario = new Usuario(56);
-
+        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico(), servicioClima);
+        Usuario usuario = new Usuario(List.of(guardarropas), 22);
         usuario.agregarGuardarropa(guardarropas);
         assertDoesNotThrow(usuario::generarSugerencia);
     }
@@ -59,9 +67,8 @@ class MotorDeSugerenciasBasicoTest {
     void noDeberiaGenerarUnaSugerencia() {
         List<Prenda> prendaList = List.of(unaParteSuperior(Formalidad.INFORMAL),
                 unaParteInferior(Formalidad.INFORMAL));
-        Guardarropa guardarropas = new Guardarropa(prendaList, new MotorDeSugerenciasBasico());
-        Usuario usuario = new Usuario(56);
-
+        Guardarropa guardarropas = new Guardarropa(prendaList, "c", new MotorDeSugerenciasBasico(), servicioClima);
+        Usuario usuario = new Usuario(List.of(guardarropas), 22);
         usuario.agregarGuardarropa(guardarropas);
         assertThrows(DomainException.class, usuario::generarSugerencia);
     }

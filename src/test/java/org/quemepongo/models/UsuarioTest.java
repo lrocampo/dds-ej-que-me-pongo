@@ -1,15 +1,18 @@
 package org.quemepongo.models;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.quemepongo.enums.Color;
 import org.quemepongo.enums.Formalidad;
 import org.quemepongo.enums.Material;
 import org.quemepongo.enums.TipoPrenda;
 import org.quemepongo.exceptions.DomainException;
+import org.quemepongo.services.ServicioClima;
 import org.quemepongo.utils.PrendaBorrador;
 
 class UsuarioTest {
@@ -17,13 +20,17 @@ class UsuarioTest {
   Guardarropa guardarropaEntreCasa;
   Usuario usuario1;
   Usuario usuario2;
+  ServicioClima servicioClima;
+
   @BeforeEach
   void setUp() {
     prenda = unaPrenda();
-    guardarropaEntreCasa = new Guardarropa(List.of(prenda), new MotorDeSugerenciasBasico());
-    usuario1 = new Usuario(22);
+    servicioClima = Mockito.mock(ServicioClima.class);
+    when(servicioClima.getTemperaturaActual()).thenReturn(new Celsius(20));
+    guardarropaEntreCasa = new Guardarropa(List.of(prenda), "Ropa de Entrecasa Compartida", new MotorDeSugerenciasBasico(), servicioClima);
+    usuario1 = new Usuario(List.of(guardarropaEntreCasa), 22);
+    usuario2 = new Usuario(List.of(), 22);
     usuario1.agregarGuardarropa(guardarropaEntreCasa);
-    usuario2 = new Usuario(22);
   }
 
   @Test

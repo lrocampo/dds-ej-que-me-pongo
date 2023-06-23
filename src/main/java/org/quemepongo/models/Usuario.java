@@ -2,6 +2,8 @@ package org.quemepongo.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import org.quemepongo.repositories.RepositorioClima;
 import org.quemepongo.exceptions.DomainException;
 
 public class Usuario {
@@ -9,13 +11,33 @@ public class Usuario {
   private List<PropuestaModificacion> propuestas = new ArrayList<>();
   private Integer edad;
 
-  public Usuario(Integer edad) {
+  private String mail = "dataentry1@gmail.com";
+
+  private List<Accion> acciones = new ArrayList<>();
+
+  public Usuario(List<Guardarropa> guardarropas, Integer edad) {
+    this.guardarropas = new ArrayList<>(guardarropas);
     this.edad = edad;
+  }
+
+  public List<Sugerencia> getSugerenciaDiaria() {
+    return guardarropas.stream()
+        .map(guardarropa -> guardarropa.generarSugerenciasDiaria(this))
+        .findFirst().orElse(List.of());
+  }
+
+  public void recibirAlerta(List<Alerta> alertas) {
+    acciones.forEach(accion -> accion.activar(this, alertas));
+  }
+
+  public List<Alerta> obtenerUltAlertas() {
+    return RepositorioClima.get().consultarAlertas("Buenos Aires");
   }
 
   List<Sugerencia> generarSugerencias() {
     return guardarropas.stream()
-        .flatMap(guardarropa -> guardarropa.generarSugerencias(this).stream()).toList();
+        .flatMap(guardarropa -> guardarropa.generarSugerencias(this).stream())
+        .toList();
   }
 
   Sugerencia generarSugerencia() {
@@ -52,5 +74,7 @@ public class Usuario {
   void removerPrendaTentativa(Prenda prenda, Guardarropa guardarropa) {
     propuestas.add(new QuitarPrenda(guardarropa, prenda));
   }
-
+  public String getMail() {
+    return mail;
+  }
 }
